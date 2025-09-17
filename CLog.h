@@ -1,12 +1,11 @@
 ﻿#ifndef C_LOG_H
 #define C_LOG_H
 
-#include <fstream>
-#include <sstream>
 #include <Windows.h>
 
 namespace KGF
 {
+    //////////////////////////////////////////////////////////////////////////
     enum LogLevel
     {
         FATAL,
@@ -16,7 +15,7 @@ namespace KGF
         DEBUG,
         SCRIPTERS       
     };
-
+    //////////////////////////////////////////////////////////////////////////
     class CLog 
     {
     public:
