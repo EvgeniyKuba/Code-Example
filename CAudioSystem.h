@@ -4,11 +4,9 @@
 #pragma warning(disable : 4834)
 #pragma warning(disable : 4244)
 
-#include <SFML/Audio.hpp>
-#include "CIni.h"
-
 namespace KGF
 {
+	//////////////////////////////////////////////////////////////////////////
 	class CAudioSystem
 	{
 	public:
@@ -53,6 +51,7 @@ namespace KGF
 	};
 
 }
+
 
 
 #endif
