@@ -1,10 +1,13 @@
 ﻿#include "CAudioSystem.h"
 
+//////////////////////////////////////////////////////////////////////////
+
 namespace KGF
 {
+	//////////////////////////////////////////////////////////////////////////
 	sf::SoundBuffer soundBuffer;
 	sf::Sound sound(soundBuffer);
-
+	//////////////////////////////////////////////////////////////////////////
 	sf::SoundBuffer& CAudioSystem::getBuffer(const std::string& filename)
 	{
 		auto it = bufferCache.find(filename);
@@ -27,7 +30,7 @@ namespace KGF
 			}
 		}
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::playMusic1(const std::string& name, bool loop)
 	{
 		music1.openFromFile(name);
@@ -50,7 +53,7 @@ namespace KGF
 		music1.setVolume(volumeMusic1 * volumeMaster / 100);
 		music1.play();
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::playMusic2(const std::string& name, bool loop)
 	{
 		music2.openFromFile(name);
@@ -74,7 +77,7 @@ namespace KGF
 		music2.setVolume(volumeMusic2 * volumeMaster / 100);
 		music2.play();
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::playSound(const std::string& name, bool loop)
 	{
 		soundBuffer.loadFromFile(name);
@@ -97,7 +100,7 @@ namespace KGF
 		sound.setVolume(volumeSound * volumeMaster / 100);
 		sound.play();
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::playSFX(const std::string& name)
 	{
 		sf::SoundBuffer& buf = getBuffer(name);
@@ -120,19 +123,19 @@ namespace KGF
 		rawSoundPtr->setVolume(volumeSFX * volumeMaster / 100);
 		rawSoundPtr->play();
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::MusicLoopEnd()
 	{
 		fadingOutM = true;
 		fadeClockM.restart(); 		
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::AmbientLoopEnd()
 	{
 		fadingOutA = true;
 		fadeClockA.restart(); 		
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::setVolMaster(unsigned short vol)
 	{
 		volumeMaster = vol;
@@ -146,7 +149,7 @@ namespace KGF
 		}
 		ini.Save(); 
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::setVolMusic1(unsigned short vol)
 	{
 		volumeMusic1 = vol;
@@ -154,7 +157,7 @@ namespace KGF
 		music1.setVolume(volumeMusic1 * volumeMaster / 100);
 		ini.Save();
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::setVolMusic2(unsigned short vol)
 	{
 		volumeMusic2 = vol;
@@ -162,7 +165,7 @@ namespace KGF
 		music2.setVolume(volumeMusic2 * volumeMaster / 100);
 		ini.Save();
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::setVolSound(unsigned short vol)
 	{
 		volumeSound = vol;
@@ -170,7 +173,7 @@ namespace KGF
 		sound.setVolume(volumeSound * volumeMaster / 100);
 		ini.Save();
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::setVolSFX(unsigned short vol)
 	{
 		volumeSFX = vol;
@@ -181,7 +184,7 @@ namespace KGF
 		}
 		ini.Save();
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CAudioSystem::update()
 	{
 		auto it = activeSounds.begin();
@@ -238,4 +241,5 @@ namespace KGF
 			}
 		}
 	}
+	//////////////////////////////////////////////////////////////////////////
 }
