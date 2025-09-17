@@ -2,11 +2,12 @@
 
 namespace KGF
 {
+	//////////////////////////////////////////////////////////////////////////
     CLog::CLog()
     {
         setUp();
     }
-
+	//////////////////////////////////////////////////////////////////////////
     void CLog::setUp()
     {
         std::locale::global(std::locale("ru_RU.UTF-8"));
@@ -15,7 +16,7 @@ namespace KGF
         ofs.close();
         logHeader();
     }
-
+	//////////////////////////////////////////////////////////////////////////
 	void CLog::Write(LogLevel level, const std::wstring& message)
 	{
         std::wofstream ofs(filepath, std::ios::app);
@@ -27,26 +28,26 @@ namespace KGF
 
         ofs << getCurrentTime() << L" " << levelToString(level) << message << std::endl;
 	}
-
+	//////////////////////////////////////////////////////////////////////////
     void CLog::logHeader()
     {
         std::wofstream ofs(filepath, std::ios::app);
         if (!ofs) return;
 
         ofs << L" " << std::endl;
-        ofs << L"              ██╗  ██╗   ██████╗   ███████╗            " << std::endl;
-        ofs << L"              ██║ ██╔╝  ██╔═══██╗  ██╔════╝            " << std::endl;
-        ofs << L"              █████╔╝   ██║        ███████╗            " << std::endl;
-        ofs << L"              ██╔═██╗   ██║  ██║   ██╔════╝            " << std::endl;
-        ofs << L"              ██║  ██╗  ╚██████╔╝  ██║                 " << std::endl;
-        ofs << L"              ╚═╝  ╚═╝   ╚═════╝   ╚═╝                 " << std::endl;
+ofs << L"\t██╗  ██╗   ██████╗   ███████╗\n"
+    << L"\t██║ ██╔╝  ██╔═══██╗  ██╔════╝\n"
+    << L"\t█████╔╝   ██║        ███████╗ \n"
+    << L"\t██╔═██╗   ██║  ██║   ██╔════╝\n"
+    << L"\t██║  ██╗  ╚██████╔╝  ██║ \n"
+    << L"\t╚═╝  ╚═╝   ╚═════╝   ╚═╝ \n";
         ofs << L" " << std::endl;
         ofs << L"=============== Kuba Games Framework Log ================" << std::endl;
         ofs << L"               Старт: " << getCurrentTime() << std::endl;
         ofs << L"=========================================================" << std::endl;
         ofs << L" " << std::endl;
     }
-
+	//////////////////////////////////////////////////////////////////////////
     std::wstring CLog::levelToString(LogLevel level) const
     {
         switch (level) {
@@ -59,7 +60,7 @@ namespace KGF
         default: return L"";
         }
     }
-
+	//////////////////////////////////////////////////////////////////////////
     std::wstring CLog::getCurrentTime() const {
         std::wstringstream ss;
         std::time_t t = std::time(nullptr);
@@ -72,5 +73,5 @@ namespace KGF
         ss << buffer;
         return ss.str();
     }
-
+	//////////////////////////////////////////////////////////////////////////
 }
