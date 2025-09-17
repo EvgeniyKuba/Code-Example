@@ -2,7 +2,7 @@
 
 namespace KGF
 {
-
+	//////////////////////////////////////////////////////////////////////////
 	void CVideoObject::Load(std::string filename)
 	{
 		if (avformat_open_input(&fmt_ctx, filename.c_str(), nullptr, nullptr) != 0) 
@@ -10,13 +10,10 @@ namespace KGF
 			std::cerr << "Не удалось открыть файл" << std::endl;
 
 		}
-
-
 		setUp();
-
 		texture.resize(sf::Vector2u(codec_ctx->width, codec_ctx->height));
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CVideoObject::Update(unsigned short fpsleep, bool isLoop)
 	{
 		if (av_read_frame(fmt_ctx, pkt) >= 0)
@@ -48,14 +45,14 @@ namespace KGF
 			}
 		}
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CVideoObject::Start(unsigned short fpssleep, bool isLoop)
 	{
 		if (running) return; 
 		running = true;
 		workerThread = std::thread(&CVideoObject::threadFunc, this, fpssleep, isLoop);
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CVideoObject::Stop()
 	{
 		if (running)
@@ -65,7 +62,7 @@ namespace KGF
 				workerThread.join();
 		}
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CVideoObject::threadFunc(unsigned short fpssleep, bool isLoop)
 	{
 		while (running)
@@ -73,7 +70,7 @@ namespace KGF
 			Update(fpssleep, isLoop);
 		}
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 	void CVideoObject::setUp()
 	{
 		if (avformat_find_stream_info(fmt_ctx, nullptr) < 0)
@@ -81,7 +78,6 @@ namespace KGF
 			std::cerr << "Не удалось найти информацию о потоках" << std::endl;
 			avformat_close_input(&fmt_ctx);
 		}
-
 
 		for (unsigned int i = 0; i < fmt_ctx->nb_streams; i++)
 		{
@@ -134,8 +130,7 @@ namespace KGF
 		av_image_fill_arrays(frame_bgra->data, frame_bgra->linesize, buffer, AV_PIX_FMT_BGRA, codec_ctx->width, codec_ctx->height, 1);
 		pkt = av_packet_alloc();
 	}
-
-
+	//////////////////////////////////////////////////////////////////////////
 	void CVideoObject::Clean()
 	{
 		av_frame_free(&frame);
@@ -146,5 +141,5 @@ namespace KGF
 		av_free(buffer);
 		av_packet_free(&pkt);
 	}
-
+	//////////////////////////////////////////////////////////////////////////
 }
