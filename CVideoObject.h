@@ -15,9 +15,9 @@ extern "C"
 #include <thread>
 #include <atomic>
 
-
 namespace KGF
 {
+	//////////////////////////////////////////////////////////////////////////
 	class CVideoObject
 	{
 	public:
@@ -32,7 +32,6 @@ namespace KGF
 		void Stop();
 
 		sf::Texture texture;
-		
 		
 	private:
 		void setUp();
@@ -52,8 +51,6 @@ namespace KGF
 		int num_bytes;
 		uint8_t* buffer;
 		AVPacket* pkt;
-
-		
 
 	};
 }
